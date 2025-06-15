@@ -1,1 +1,38 @@
-<p>mantenedor-productos works!</p>
+<div class="contenedor-productos">
+  <h2>Mantenedor de Productos</h2>
+
+  <div class="acciones-superiores">
+    <button (click)="nuevoProducto()">+ Nuevo Producto</button>
+  </div>
+
+  <table *ngIf="productos.length > 0; else sinProductos">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Material</th>
+        <th>Medidas</th>
+        <th>Precio</th>
+        <th>Activo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of productos">
+        <td>{{ producto.nombre }}</td>
+        <td>{{ producto.material }}</td>
+        <td>{{ producto.medidas }}</td>
+        <td>{{ producto.precio }}</td>
+        <td>{{ producto.activo === 1 ? 'Sí' : 'No' }}</td>
+        <td>
+          <button (click)="editarProducto(producto.idProducto)">Editar</button>
+          <button (click)="desactivarProducto(producto.idProducto)" *ngIf="producto.activo === 1">Desactivar</button>
+          <button (click)="eliminarProducto(producto.idProducto)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #sinProductos>
+    <p>No hay productos registrados.</p>
+  </ng-template>
+</div>
